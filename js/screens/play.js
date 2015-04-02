@@ -6,11 +6,18 @@ game.PlayScreen = me.ScreenObject.extend({
         // reset the score
         game.data.score = 0;
         me.levelDirector.loadLevel("level01");
+        
 
         var player = me.pool.pull("player", 0, 420, {});
         me.game.world.addChild(player, 5);
+        
+        var gamemanager = me.pool.pull("GameManager", 0, 0, {});
+        me.game.world.addChild(gamemanager, 0);
 
         me.input.blindkey(me.input.KEY.RIGHT, "right");
+        me.input.blindkey(me.input.KEY.LEFT, "left");
+        me.input.blindkey(me.input.KEY.SPACE, "jump");
+        me.input.blindKey(me.input.KEY.A, "attack");
 
         // add our HUD to the game world
         this.HUD = new game.HUD.Container();
