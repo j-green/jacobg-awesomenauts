@@ -1,3 +1,4 @@
+
 /* Game namespace */
 var game = {
 
@@ -5,30 +6,35 @@ var game = {
 	data : {
 		// score
 		score : 0,
-                enemyBaseHealth: 50,
-                playerBaseHealth: 50,
+                enemyBaseHealth: 1,
+                playerBaseHealth: 1,
                 enemyCreepHealth: 10,
                 playerHealth: 20,
                 enemyCreepAttack: 1,
-                playerAttack: 2,
+                playerAttack: 20,
                 enemyCreepAttackTimer: 1000,
                 playerAttackTimer: 1000,
-                playerMoveSpeed: 15,
-                creepMoveSpeed: 5,
+                playerMoveSpeed: 5,
+                creepMoveSpeed: 3,
                 gameTimerManager: "",
                 heroDeathManager: "",
                 experienceManager: "",
                 player: "",
                 exp: 0,
                 gold: 0,
+                skill1: 0,
+                skill2: 0,
+                skill3: 0,
+                ability1: 0,
+                ability2: 0,
+                ability3: 0,
                 exp1: 0,
                 exp2: 0,
                 exp3: 0,
                 exp4: 0,
-                win: "",
                 pausePos: "",
-                buyscreen: "",
-                buytext: ""
+                buyScreen: "",
+                buyText: ""
 	},
 	
 	
@@ -47,9 +53,9 @@ var game = {
 		});
 	}
         
-        me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
-        
         me.state.SPENDEXP = 112;
+        me.state.NEW = 113;
+        me.state.LOAD = 114;
 
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");
@@ -78,6 +84,8 @@ var game = {
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
                 me.state.set(me.state.SPENDEXP, new game.SpendExp());
+                me.state.set(me.state.LOAD, new game.LoadProfile());
+                me.state.set(me.state.NEW, new game.NewProfile());
 
 		// Start the game.
 		me.state.change(me.state.MENU);

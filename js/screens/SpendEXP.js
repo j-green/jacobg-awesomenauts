@@ -16,7 +16,7 @@ game.SpendExp = me.ScreenObject.extend({
                 me.game.world.addChild(new (me.Renderable.extend({
                     init: function() {
                         this._super(me.Renderable, "init", [10, 10, 300, 50]);
-                        this.font = new me.Font("Arial", 26, "green");
+                        this.font = new me.Font("Arial", 26, "white");
                     },
                     
                     draw: function(renderer) {
@@ -26,6 +26,10 @@ game.SpendExp = me.ScreenObject.extend({
                         this.font.draw(renderer.getContext(), "F2: INCREASE STARTING GOLD!", this.pos.x, this.pos.y + 200);
                         this.font.draw(renderer.getContext(), "F3: INCREASE DAMAGE!", this.pos.x, this.pos.y + 250);
                         this.font.draw(renderer.getContext(), "F4: INCREASE STARTING HEALTH!", this.pos.x, this.pos.y + 300);
+                    },
+                    
+                    update: function() {
+                        return true;
                     }
                 })));
                 this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge){
@@ -33,7 +37,6 @@ game.SpendExp = me.ScreenObject.extend({
                         if(game.data.exp >= exp1cost) {
                             game.data.exp1 += 1;
                             game.data.exp -= exp1cost;
-                            me.state.change(me.state.PLAY);
                         }
                         else {
                             console.log("NOT ENOUGH EXPERIENCE");
@@ -67,5 +70,3 @@ game.SpendExp = me.ScreenObject.extend({
             me.event.unsubscribe(this.handler);
 	}
 });
-
-
